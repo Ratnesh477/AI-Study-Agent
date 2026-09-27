@@ -81,12 +81,12 @@ Return ONLY valid JSON matching this exact shape, no prose, no markdown code blo
 ${shapeInstructions}`;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.5-flash-lite',
       contents: prompt,
     });
 
     const text = response.text;
-    
+
     // Attempt basic cleanup just in case the model returns markdown formatting like ```json ... ```
     let jsonString = text.trim();
     if (jsonString.startsWith('```json')) {
@@ -167,12 +167,12 @@ Return ONLY valid JSON matching this exact shape, no prose, no markdown code blo
 ${shapeInstructions}`;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.5-flash-lite',
       contents: prompt,
     });
 
     const text = response.text;
-    
+
     let jsonString = text.trim();
     if (jsonString.startsWith('```json')) jsonString = jsonString.slice(7);
     if (jsonString.startsWith('```')) jsonString = jsonString.slice(3);
