@@ -1,5 +1,5 @@
 export async function generateStudyMaterial(topic: string, mode: 'flashcards' | 'summary' | 'mcq' | 'plan'): Promise<string> {
-  const response = await fetch('http://localhost:3001/api/generate', {
+  const response = await fetch('/api/generate', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export async function generateStudyMaterial(topic: string, mode: 'flashcards' | 
 }
 
 export async function refineStudyMaterial(currentData: any, instruction: string): Promise<string> {
-  const response = await fetch('http://localhost:3001/api/refine', {
+  const response = await fetch('/api/refine', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
