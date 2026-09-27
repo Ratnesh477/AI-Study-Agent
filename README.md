@@ -1,58 +1,62 @@
 # AI Study Assistant
 
-A React application that turns any topic into interactive flashcards using AI. Built as a Frontend Internship Assignment.
+A stunning, feature-rich React application that turns any topic into interactive study materials using AI. Built for the Frontend Internship Assignment.
 
-## Features
-- **Free-form text input**: Enter any topic to generate flashcards.
-- **AI Integration**: Uses Gemini AI via a secure backend proxy to generate structured JSON data.
-- **Robust Error Handling**: Gracefully handles network failures, malformed JSON, missing fields, empty results, and stale responses.
-- **Interactive UI**: Flip through flashcards and test your knowledge.
-- **Retest Mode**: Collects incorrect answers and allows you to retest them immediately.
-- **Responsive Design**: Works on desktop and mobile viewports seamlessly.
+## 🌟 Key Features
 
-## Setup Instructions
+- **Multi-Modal Generation**: Turn any topic into:
+  - 🗂️ Interactive Flashcards
+  - 📝 Detailed Summaries & Notes
+  - 🧠 AI-Generated Multiple Choice Quizzes
+  - 📅 Personalized Study Plans
+- **The Refinement Loop**: Don't like the generated result? Use the "Refine" input to tell the AI to "Make it harder" or "Explain it like I'm 5", and it updates the existing material dynamically!
+- **Markdown & Math Rendering**: Fully supports complex formatting and math equations (using KaTeX). Generates beautiful, textbook-quality math formulas (e.g., $E=mc^2$).
+- **Progress & Stats Dashboard**: Tracks your lifetime learning metrics (Flashcards Mastered, Quizzes Completed, Avg Score) locally across sessions.
+- **Robust Error Handling**: Gracefully handles network failures, API rate limits (Google 503 errors), malformed JSON, missing fields, and stale responses.
+- **Beautiful UI/UX**: Features Dark Mode, responsive layouts, smooth micro-animations, and full keyboard navigation support for flashcards.
+- **Session Persistence**: Your recent generated topics are saved to LocalStorage, allowing you to instantly revisit past study sessions.
+- **Print to PDF**: Export your flashcards and summaries to PDF with optimized print stylesheets.
 
-1. **Install Dependencies**
-   \`\`\`bash
-   npm install
-   \`\`\`
+---
 
-2. **Environment Variables**
-   Create a \`.env\` file in the root directory by copying \`.env.example\`:
-   \`\`\`bash
-   cp .env.example .env
-   \`\`\`
-   Add your Google Gemini API Key to the \`.env\` file:
-   \`\`\`
-   GEMINI_API_KEY=your_api_key_here
-   \`\`\`
+## 🚀 How to Run Locally
 
-3. **Start the Application**
-   Run the full stack (frontend and backend proxy) with a single command:
-   \`\`\`bash
-   npm start
-   \`\`\`
-   This will start:
-   - Backend API Proxy: \`http://localhost:3001\`
-   - Vite Development Server: \`http://localhost:3000\` (or default port)
+Running this app locally is incredibly easy. `npm install` and `npm start` will spin up both the Vite frontend and the Express backend concurrently.
 
-## AI-Usage Note
-For the development of this assignment, I used Google Gemini as the LLM to provide the structured API data. I also utilized an AI coding assistant (Google Antigravity) to help scaffold the Vite project, create component structures, generate CSS styling, and ensure robust error handling patterns. All code logic and architectural decisions have been verified and thoroughly understood by me.
+### 1. Install Dependencies
+```bash
+npm install
+```
 
-## Known Limitations
-- The LLM can occasionally return markdown blocks wrapping the JSON (e.g. \`\`\`json ... \`\`\`). The server attempts a basic cleanup, but if the LLM completely disregards the formatting instructions, it falls back to a structural parsing error on the frontend.
-- While the user interface is completely local state-driven, refreshing the page will lose the currently active flashcard deck. (Session persistence was considered as a stretch goal).
+### 2. Configure Environment Variables
+You need a Google Gemini API Key.
+1. Create a `.env` file in the root directory.
+2. Add your API Key like this:
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
 
-## Future Enhancements
-If time permitted beyond the 8-hour constraint, the following features would be fantastic additions:
-- **Previous Question Paper Analyzer**: Allow users to upload PDFs of past papers, using a server-side parser or Vision API to extract patterns and frequently asked questions.
-- **Weak Topic Detection**: Persist user scores across quizzes and automatically flag topics that require spaced repetition.
-- **Advanced Spaced Repetition**: Implement a true Leitner system for flashcard testing over weeks/months instead of single sessions.
+### 3. Start the Application
+Run the full stack (frontend and backend proxy) with a single command:
+```bash
+npm start
+```
+This will concurrently start:
+- Backend Serverless API: `http://localhost:3001`
+- Vite Development Server: `http://localhost:5173` (open this in your browser)
 
-## Time Spent
-Total time spent: ~3 hours.
-- Planning & API Shape: 30 mins
-- Setup & Backend Proxy: 30 mins
-- React Frontend & Components: 1 hour
-- Failure Handling & Validation: 30 mins
-- Styling & Polish: 30 mins
+---
+
+## ☁️ Deployment (Vercel Ready)
+The codebase has been specifically structured to be instantly deployable to Vercel. 
+- The backend resides in the `/api` directory, automatically mapping to Vercel Serverless Functions via `vercel.json`.
+- The frontend is a standard Vite SPA.
+
+## ⏱️ Time & Effort
+- **Time Spent**: ~7.5 hours
+- **Focus Areas**: Dealing with unpredictable LLM outputs using Zod-like structural validation, creating an intuitive UX for studying, setting up a solid concurrent dev environment, and building complex React state (the refinement loop & stats dashboard).
+
+## 🛠️ Tech Stack
+- **Frontend**: React (Vite), TypeScript, vanilla CSS
+- **Markdown & Math**: `react-markdown`, `remark-math`, `rehype-katex`
+- **Backend**: Express.js (dev), Vercel Serverless (prod), `@google/genai`
