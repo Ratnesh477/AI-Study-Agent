@@ -46,6 +46,11 @@ export const FlashcardDeck: React.FC<FlashcardDeckProps> = ({ data, onRetest, on
     const handleKeyDown = (e: KeyboardEvent) => {
       if (finished) return;
       
+      // Ignore if user is typing in an input or textarea
+      if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') {
+        return;
+      }
+      
       if (e.code === 'Space' || e.code === 'Enter' || e.code === 'ArrowUp' || e.code === 'ArrowDown') {
         e.preventDefault();
         setIsFlipped((prev) => !prev);
